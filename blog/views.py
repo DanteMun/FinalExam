@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Shop, Review
@@ -29,6 +30,7 @@ def category_new(request):
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
             category = form.save()
+            messages.success(request, '새로운 카테고리가 등록되었습니다.')
             return redirect(category)
     else:
         form = CategoryForm()
@@ -57,6 +59,7 @@ def shop_new(request):
         form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
             shop = form.save()
+            messages.success(request, '새로운 가게가 등록되었습니다.')
             return redirect(shop)
     else:
         form = ShopForm()
@@ -90,6 +93,7 @@ def review_new(request, shop_pk):
             review.shop = shop
             review.user = request.user
             review.save()
+            messages.success(request, '새로운 리뷰가 등록되었습니다.')
             return redirect(shop)
     else:
         form = ReviewForm()
