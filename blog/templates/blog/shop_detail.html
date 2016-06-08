@@ -3,12 +3,37 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron">
-        <h3>{{shop.title}}</h3>
+        <h3>{{shop.title}}
+            <a href="{% url 'blog:shop_edit' shop.pk %}" class="btn btn-xs btn-default">
+            수정
+            </a>
+        </h3>
         <img src="{{ shop.photo1.url }}">
         <h4>전화 번호 : {{shop.number}}</h4>
         <h4>주 소 : {{shop.address}}</h4>
         <h4>가게 설명 : {{shop.about}}</h4>
     </div>
+    <div class="jumbotron">
+    <h3>리뷰
+    <a href="{% url 'blog:review_new' shop.pk %}" class="btn btn-xs btn-default">작성</a>
+    </h3>
+    {% for review in shop.review_set.all %}
+        <div style="background-color: white;padding: 2px 1% 2px 1%;">
+            <h5>{{review.message}}</h5>
+            <h6 style="color:gray;">by {{review.user}} | {{review.created_at}}
+                <a href="{% url 'blog:review_edit' shop.pk review.pk %}">
+                    수정
+                </a>
+            </h6>
+        </div>
+    {% endfor %}
+    <br>
+    <hr>
+
+    <a href="{% url 'blog:index' %}" class="btn btn-default">가게 목록</a>
+    </div>
+
 </div>
+
 
 {% endblock %}

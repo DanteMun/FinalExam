@@ -3,15 +3,27 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron">
-        <h3>{{category.title}}</h3>
+        <h3>{{category.title}}
+            <a href="{% url 'blog:category_edit' category.pk %}" class="btn btn-xs btn-default">
+                수정
+            </a>
+        </h3>
             <ul>
             {% for shop in category.shop_set.all %}
                 <a href="{% url 'blog:shop_detail' shop.pk %}" style="font-size: 18px;">
-                    <li>{{ shop.title }}</li>
+                    <li>{{ shop.title }}
+                        <a href="{% url 'blog:shop_edit' shop.pk %}" class="btn btn-xs btn-default">
+                            수정
+                        </a>
+                    </li>
                 </a>
             {% endfor %}
             </ul>
+            <br>
+            <hr>
+            <a href="{% url 'blog:shop_new' %}" class="btn btn-xs btn-primary btn-block">새로운 가게</a>
     </div>
+
 </div>
 
 {% endblock %}

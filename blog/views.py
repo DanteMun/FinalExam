@@ -5,8 +5,10 @@ from .forms import CategoryForm, ShopForm, ReviewForm
 
 def index(request):
     category_list = Category.objects.all()
+    review_list = Review.objects.all()
     return render(request, 'blog/index.html', {
         'category_list' : category_list,
+        'review_list' : review_list,
         })
 
 def category_detail(request, pk):
