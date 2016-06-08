@@ -3,8 +3,20 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron">
-        <h1>Ask Django</h1>
-        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+        <h2>카테고리</h2>
+          {% for category in category_list %}
+          <a href="{% url 'blog:category_detail' category.pk %}">
+            <h3>{{category.title}}</h3>
+          </a>
+          <ul>
+            {% for shop in category.shop_set.all %}
+              <a href="{% url 'blog:shop_detail' shop.pk %}" style="font-size: 18px;">
+              <li>{{ shop.title }}</li>
+              </a>
+            {% endfor %}
+          </ul>
+          {% endfor %}
+          <br>
     </div>
 </div>
 {% endblock %}

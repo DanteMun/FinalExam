@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h3>{{category.title}}</h3>
+            <ul>
+            {% for shop in category.shop_set.all %}
+                <a href="{% url 'blog:shop_detail' shop.pk %}" style="font-size: 18px;">
+                    <li>{{ shop.title }}</li>
+                </a>
+            {% endfor %}
+            </ul>
+    </div>
+</div>
+
+{% endblock %}
