@@ -9,6 +9,12 @@
             </a>
         </h3>
         <img src="{{ shop.photo1.url }}">
+        {% if shop.photo2 %}
+        <img src="{{ shop.photo2.url }}">
+        {% endif %}
+        {% if shop.photo3 %}
+        <img src="{{ shop.photo3.url }}">
+        {% endif %}
         <h4>전화 번호 : {{shop.number}}</h4>
         <h4>주 소 : {{shop.address}}</h4>
         <h4>가게 설명 : {{shop.about}}</h4>
@@ -20,6 +26,9 @@
     {% for review in shop.review_set.all %}
         <div style="background-color: white;padding: 2px 1% 2px 1%;">
             <h5>{{review.message}}</h5>
+            {% if review.photo %}
+            <img src="{{ review.photo.url }}">
+            {% endif %}
             <h6 style="color:gray;">by {{review.user}} | {{review.created_at}}
                 <a href="{% url 'blog:review_edit' shop.pk review.pk %}">
                     수정
