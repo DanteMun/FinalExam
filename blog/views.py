@@ -35,6 +35,21 @@ def category_new(request):
         })
 
 @login_required
+def category_edit(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+
+    if request.method =="POST":
+        form = CategoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            category = form.save(commit=False)
+            return redirect(category)
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'blog/category_form.html', {
+        'form': form,
+        })
+
+@login_required
 def shop_new(request):
     if request.method =="POST":
         form = ShopForm(request.POST, request.FILES)
@@ -43,6 +58,21 @@ def shop_new(request):
             return redirect(shop)
     else:
         form = ShopForm()
+    return render(request, 'blog/shop_form.html', {
+        'form': form,
+        })
+
+@login_required
+def shop_edit(request, pk):
+    shop = get_object_or_404(Shop, pk=pk)
+
+    if request.method =="POST":
+        form = ShopForm(request.POST, request.FILES, instance=shop)
+        if form.is_valid():
+            shop = form.save(commit=False)
+            return redirect(shop)
+    else:
+        form = ShopForm(instance=shop)
     return render(request, 'blog/shop_form.html', {
         'form': form,
         })
