@@ -12,6 +12,7 @@ class Category(models.Model):
         return self.title
 
 class Shop(models.Model):
+    category = models.ForeignKey(Category)
     title = models.CharField(max_length=100)
     number = models.CharField(max_length=20)
     address = models.CharField(max_length=100)
