@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^shop/(?P<pk>\d+)/edit/$', 'blog.views.shop_edit', name='shop_edit'),
 
     url(r'^shop/(?P<shop_pk>\d+)/review/new/$', 'blog.views.review_new', name='review_new'),
+    url(r'^shop/(?P<shop_pk>\d+)/review/(?P<pk>\d+)/edit/$', 'blog.views.review_edit', name='review_edit'),
 ]
