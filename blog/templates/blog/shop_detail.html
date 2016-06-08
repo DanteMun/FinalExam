@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h3>{{shop.title}}</h3>
+        <img src="{{ shop.photo1.url }}">
+        <h4>전화 번호 : {{shop.number}}</h4>
+        <h4>주 소 : {{shop.address}}</h4>
+        <h4>가게 설명 : {{shop.about}}</h4>
+    </div>
+</div>
+
+{% endblock %}
