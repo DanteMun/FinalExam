@@ -34,6 +34,14 @@ body {
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Dante's Blog</a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'accounts:logout' %}?next={{request.path}}">로그아웃</a></li>
+          {% else %}
+            <li><a href="{% url 'accounts:login' %}?next={{request.path}}">로그인</a></li>
+            <li><a href="{% url 'accounts:signup' %}?next={{request.path}}">회원가입</a></li>
+          {% endif %}
+        </ul>
     </div>
 </div>
 
