@@ -46,6 +46,8 @@ def category_edit(request, pk):
         form = CategoryForm(request.POST, request.FILES, instance=category)
         if form.is_valid():
             category = form.save(commit=False)
+            category.save()
+            messages.success(request, '카테고리 정보가 수정되었습니다.')
             return redirect(category)
     else:
         form = CategoryForm(instance=category)
@@ -75,6 +77,8 @@ def shop_edit(request, pk):
         form = ShopForm(request.POST, request.FILES, instance=shop)
         if form.is_valid():
             shop = form.save(commit=False)
+            shop.save()
+            messages.success(request, '가게 정보가 수정되었습니다.')
             return redirect(shop)
     else:
         form = ShopForm(instance=shop)
@@ -112,6 +116,7 @@ def review_edit(request, shop_pk, pk):
             review.shop = get_object_or_404(Shop, pk=shop_pk)
             review.user = request.user
             review.save()
+            messages.success(request, '리뷰 내용이 수정되었습니다.')
             return redirect('blog:shop_detail', shop_pk)
     else:
         form = ReviewForm(instance=review)
