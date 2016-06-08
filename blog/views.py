@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Shop
-from .forms import CategoryForm, ShopForm
+from .forms import CategoryForm, ShopForm, ReviewForm
 
 def index(request):
     category_list = Category.objects.all()
@@ -75,4 +75,22 @@ def shop_edit(request, pk):
         form = ShopForm(instance=shop)
     return render(request, 'blog/shop_form.html', {
         'form': form,
+        })
+
+@login_required
+def review_new(request, shop_pk):
+    shop = get_object_or_404(Shop, pk=shop_pk)
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST, request.FILES)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.shop = shop
+            review.user = request.user
+            review.save()
+            return redirect(shop)
+    else:
+        form = ReviewForm()
+    return render(request, 'blog/review_form.html', {
+        'form' : form,
         })
